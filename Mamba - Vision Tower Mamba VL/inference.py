@@ -31,7 +31,8 @@ mamba_llm = MambaForCausalLM.from_pretrained("/scratch/faaraan/mamba-chat/mamba-
 # Function to generate a response
 def generate_response(image_url, text_prompt):
     # Step 1: Prepare the image
-    image = Image.open(requests.get(image_url, stream=True).raw)
+    # image = Image.open(requests.get(image_url, stream=True).raw)
+    image = Image.open(image_url).convert("RGB")
     transform = create_transform(input_size=(3, 224, 224), is_training=False)
     image_tensor = transform(image).unsqueeze(0).cuda()
 
@@ -72,7 +73,7 @@ def generate_response(image_url, text_prompt):
     return generated_text
 
 # Test the function with an image and prompt
-image_url = 'http://images.cocodataset.org/val2017/000000020247.jpg'
-text_prompt = "Is there is bear in this image?"
+image_url = '/scratch/faaraan/LLaVAData/images/week_02/week_02_page_016.png'
+text_prompt = "How does the analysis of decision boundaries extend to higher-dimensional spaces?"
 response = generate_response(image_url, text_prompt)
 print("Response:", response)
