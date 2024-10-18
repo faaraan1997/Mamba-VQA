@@ -195,7 +195,7 @@ for epoch in range(1, epochs + 1):
 
         optimizer.step()
 
-    if epoch % 25 == 0 or epoch == epochs:
+    if epoch % 10 == 0 or epoch == epochs:
         checkpoint_path = os.path.join(checkpoint_dir, f"epoch_{epoch}.pt")
         torch.save({
             'epoch': epoch,

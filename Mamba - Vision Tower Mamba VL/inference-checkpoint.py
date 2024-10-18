@@ -113,8 +113,9 @@ def generate_response(image_path, text_prompt, model_saved,
     # 2.5. Tokenize the Text Prompt
     # -----------------------------
       # Modify the prompt to guide the model toward a 250-word summary
-    text_prompt += " Please summarize the analysis in approximately 250 words or less, organizing the summary into paragraphs."
-
+    # text_prompt += " Please summarize the analysis in approximately 250 words or less, organizing the summary into paragraphs."
+    text = f"A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers approximately more 250 words or less to the user's questions. USER: <image>\n{text_prompt}? ASSISTANT:"
+        
     inputs = tokenizer(text_prompt, return_tensors="pt", truncation=True, padding=True)
     input_ids = inputs['input_ids'].to(device)  # Shape: [1, seq_len]
     attention_mask = inputs['attention_mask'].to(device)  # Shape: [1, seq_len]
@@ -157,7 +158,7 @@ def generate_response(image_path, text_prompt, model_saved,
 # -----------------------------
 if __name__ == "__main__":
     # Path to the saved checkpoint
-    model_saved = "/scratch/faaraan/mamba-chat/Mamba - Vision Tower Mamba VL/checkpoints/epoch_new_2.pt"
+    model_saved = "/scratch/faaraan/mamba-chat/Mamba - Vision Tower Mamba VL/checkpoints/epoch_50.pt"
 
     # Input image and prompt
     image_path = "/scratch/faaraan/LLaVAData/images/week_02/week_02_page_016.png"
