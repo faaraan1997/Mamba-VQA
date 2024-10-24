@@ -86,7 +86,7 @@ for param in mamba_llm.parameters():
 mamba_llm.eval()
 
 # Training configuration
-epochs = 50
+epochs = 250
 optimizer = AdamW(mmc.parameters(), lr=1e-5)  # Adjust the optimizer and learning rate as needed
 loss_fn = torch.nn.CrossEntropyLoss(ignore_index=-100)  # Define the loss function
 
